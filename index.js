@@ -4,6 +4,14 @@ let map;
 const San_Diego = { lat: 32.7157, lng: -117.1611 };
 
 /**
+ * Creates an input box that recenter the map to the 
+ * inputted coordinates.
+ */
+function createGoTo(map) {
+}
+
+
+/**
  * Creates a control that recenters the map on San Diego.
  */
 function createCenterControl(map) {
