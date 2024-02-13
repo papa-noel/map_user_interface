@@ -4,7 +4,7 @@ let map;
 const San_Diego = { lat: 32.7157, lng: -117.1611 };
 
 /**
- * Creates an input box that recenter the map to the 
+ * Creates an input box that recenters the map to the 
  * inputted coordinates.
  */
 function createGoTo(map) {
@@ -35,7 +35,8 @@ function createCenterControl(map) {
   controlButton.type = "button";
   // Setup the click event listeners: simply set the map to Chicago.
   controlButton.addEventListener("click", () => {
-    map.setCenter(San_Diego).zoom(10);
+    map.setCenter(San_Diego)
+    map.setZoom(12);
   });
   return controlButton;
 }
@@ -108,7 +109,7 @@ function createTrainingToggle(map) {
 }
 
 /**
- * Creates a button that activates our model.
+ * Creates a button that activates the model.
  */
 function createModelExecution(map) {
   const controlButton = document.createElement("button");
@@ -130,7 +131,12 @@ function createModelExecution(map) {
   controlButton.title = "Click to run model and look for poles";
   controlButton.type = "button";
   // Setup the click event listeners
-  //
+  //controlButton.addEventListener("click", () => {
+
+  //  let center = map.getCenter();
+  //  runPythonScript(center.lat(), center.lng());
+
+  //});
   return controlButton;
 }
 
@@ -153,20 +159,59 @@ async function initMap() {
     //mapTypeControl: false
   });
 
-  // Create a div to display the zoom level
-  const zoomControlDiv = document.createElement("div");
-  updateZoomControl(zoomControlDiv, map.getZoom());
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(zoomControlDiv);
-
-  // Listen for zoom changes to update the control
-  map.addListener("zoom_changed", () => {
+  // Display zoom section of code
+  {
+    // Create a div to display the zoom level
+    const zoomControlDiv = document.createElement("div");
     updateZoomControl(zoomControlDiv, map.getZoom());
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(zoomControlDiv);
+
+    // Listen for zoom changes to update the control
+    map.addListener("zoom_changed", () => {
+      updateZoomControl(zoomControlDiv, map.getZoom());
+    });
+
+    // Function to update the zoom level control
+    function updateZoomControl(controlDiv, zoomLevel) {
+      controlDiv.innerHTML = `<div style="background-color: white; padding: 5px; border: 1px solid black; margin: 10px;">Zoom Level: ${zoomLevel}</div>`;
+    }
+ }
+
+ // Display boundary coordinates section of code
+ {
+    // Create a div to display the coordinates
+    const coordinatesDiv = document.createElement("div");
+    updateCoordinates(coordinatesDiv, map.getBounds());
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(coordinatesDiv);
+
+    // Listen for coordinate changes to update the control
+    map.addListener("bounds_changed", () => {
+      updateCoordinates(coordinatesDiv, map.getBounds());
+    });
+
+    // Function to coordinates control
+    function updateCoordinates(controlDiv, bounds) {
+      controlDiv.innerHTML = `<div style="background-color: white; padding: 5px; border: 1px solid black; margin: 10px;">Boundary Coordinates: ${bounds}</div>`;
+    }
+ }
+
+ // Display center coordinates section of code
+ {
+  // Create a div to display the center coordinates
+  const centerCoordinatesDiv = document.createElement("div");
+  updateCenterCoordinates(centerCoordinatesDiv, map.getCenter());
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerCoordinatesDiv);
+
+  // Listen for coordinate changes to update the control
+  map.addListener("bounds_changed", () => {
+    updateCenterCoordinates(centerCoordinatesDiv, map.getCenter());
   });
-  
-  // Function to update the zoom level control
-  function updateZoomControl(controlDiv, zoomLevel) {
-    controlDiv.innerHTML = `<div style="background-color: white; padding: 5px; border: 1px solid black; margin: 10px;">Zoom Level: ${zoomLevel}</div>`;
+
+  // Function to coordinates control
+  function updateCenterCoordinates(controlDiv, center) {
+    controlDiv.innerHTML = `<div style="background-color: white; padding: 5px; border: 1px solid black; margin: 10px;">Center Coordinates: ${center}</div>`;
   }
+}
   
   //Button for centering on San Diego
   {
