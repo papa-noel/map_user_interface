@@ -51,25 +51,8 @@ def save_image(latitude, longitude, zoom=19, size="640x640", scale=2, key=API_KE
     else:
         print(f"Failed to fetch satellite tile. Status code: {response.status_code}")
 
-def main():
-    # Check if the correct number of arguments are provided
-    if len(sys.argv) != 3:
-        print("Usage: python script_name.py <latitude> <longitude>")
-        sys.exit(1)
+#def main():
+    
 
-    latitude = sys.argv[1]
-    longitude = sys.argv[2]
-
-    # Optionally, validate latitude and longitude values
-    try:
-        lat = float(latitude)
-        lon = float(longitude)
-    except ValueError:
-        print("Latitude and longitude must be valid numbers.")
-        sys.exit(1)
-
-    # Call the save_image function with the provided latitude and longitude
-    save_image(lat, lon)
-
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
