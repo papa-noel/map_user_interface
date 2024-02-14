@@ -131,12 +131,32 @@ function createModelExecution(map) {
   controlButton.title = "Click to run model and look for poles";
   controlButton.type = "button";
   // Setup the click event listeners
-  //controlButton.addEventListener("click", () => {
+  controlButton.addEventListener("click", () => {
 
-  //  let center = map.getCenter();
-  //  runPythonScript(center.lat(), center.lng());
+    let center = map.getCenter();
+    let zoom = map.getZoom();
 
-  //});
+    fetch('http://127.0.0.1:5000/identify-poles', {  // Update the URL as needed
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        latitude: center.lat(), 
+        longitude: center.lng(), 
+        zoom: zoom, 
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      // Process your data here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+  });
   return controlButton;
 }
 
@@ -186,7 +206,11 @@ async function initMap() {
 
     // Listen for coordinate changes to update the control
     map.addListener("bounds_changed", () => {
-      updateCoordinates(coordinatesDiv, map.getBounds());
+      var lat0 = map.getBounds().getNorthEast().lat().toFixed(4);
+      var lng0 = map.getBounds().getNorthEast().lng().toFixed(4);
+      var lat1 = map.getBounds().getSouthWest().lat().toFixed(4);
+      var lng1 = map.getBounds().getSouthWest().lng().toFixed(4);
+      updateCoordinates(coordinatesDiv, ["NE(" + lat0 + "," + lng0 + ")", " SW(" + lat1 + "," + lng1 + ")"]);
     });
 
     // Function to coordinates control
@@ -196,15 +220,16 @@ async function initMap() {
  }
 
  // Display center coordinates section of code
+ // map.getCenter().lat()
  {
   // Create a div to display the center coordinates
   const centerCoordinatesDiv = document.createElement("div");
-  updateCenterCoordinates(centerCoordinatesDiv, map.getCenter());
+  updateCenterCoordinates(centerCoordinatesDiv, [map.getCenter().lat().toFixed(4), map.getCenter().lng().toFixed(4)]);
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerCoordinatesDiv);
 
   // Listen for coordinate changes to update the control
   map.addListener("bounds_changed", () => {
-    updateCenterCoordinates(centerCoordinatesDiv, map.getCenter());
+    updateCenterCoordinates(centerCoordinatesDiv, [map.getCenter().lat().toFixed(4), map.getCenter().lng().toFixed(4)]);
   });
 
   // Function to coordinates control

@@ -32,7 +32,7 @@ def sign_url(input_url=None, secret=None):
 
     return original_url + "&signature=" + encoded_signature.decode()
 
-def save_image(latitude, longitude, zoom=19, size="640x640", scale=2, key=API_KEY, secret=SECRET):
+def save_image(latitude, longitude, zoom, size="640x640", scale=2, key=API_KEY, secret=SECRET):
 
     # Construct the URL for satellite tile request
     satellite_url = f"https://maps.googleapis.com/maps/api/staticmap?center={latitude},{longitude}&zoom={zoom}&size={size}&scale={scale}&maptype=satellite&key={key}"
@@ -52,7 +52,15 @@ def save_image(latitude, longitude, zoom=19, size="640x640", scale=2, key=API_KE
         print(f"Failed to fetch satellite tile. Status code: {response.status_code}")
 
 #def main():
-    
+#    save_image()    
 
-#if __name__ == "__main__":
-#    main()
+if __name__ == "__main__":
+    #if len(sys.argv) < 4:
+        #print("Usage: python fetch_image.py <latitude> <longitude> <zoom>")
+        #sys.exit(1)
+    print(len(sys.argv), sys.argv)
+
+    latitude = sys.argv[1]
+    longitude = sys.argv[2]
+    zoom = sys.argv[3]
+    save_image(latitude, longitude, zoom)
