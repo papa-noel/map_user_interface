@@ -33,7 +33,7 @@ function createCenterControl(map) {
   controlButton.textContent = "Center Map";
   controlButton.title = "Click to recenter the map";
   controlButton.type = "button";
-  // Setup the click event listeners: simply set the map to Chicago.
+  // Setup the click event listeners
   controlButton.addEventListener("click", () => {
     map.setCenter(San_Diego)
     map.setZoom(12);
