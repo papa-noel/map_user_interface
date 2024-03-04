@@ -9,11 +9,11 @@ import hmac
 import base64
 import urllib.parse as urlparse
 import sys
+import run_model
 
 load_dotenv()
 API_KEY = os.environ.get("API_KEY")
 SECRET = os.environ.get("SECRET")
-
 
 def sign_url(input_url=None, secret=None):
     """
@@ -35,18 +35,23 @@ def sign_url(input_url=None, secret=None):
 def save_image(latitude, longitude, zoom, size="640x640", scale=2, key=API_KEY, secret=SECRET):
 
     # Construct the URL for satellite tile request
+    print("fetching")
     satellite_url = f"https://maps.googleapis.com/maps/api/staticmap?center={latitude},{longitude}&zoom={zoom}&size={size}&scale={scale}&maptype=satellite&key={key}"
-    satellite_url = sign_url(satellite_url, secret)
+    #satellite_url = sign_url(satellite_url, secret)
 
     response = requests.get(satellite_url)
+    
 
     # Check the response
     if response.status_code == 200:
         # Save the satellite tile image
         img_name = f'satellite_{latitude}_{longitude}_{zoom}_{scale}.png'
         img_path = img_name
-        with open(img_path, 'wb') as file:
-            file.write(response.content)
+        #with open(img_path, 'wb') as file:
+        #    file.write(response.content)
+        out_image_bytes = run_model.get_labeled(response.content)
+        return out_image_bytes 
+        #run_model.get_labeled(img_name)
         print(f"Satellite tile image saved as '{img_name}'")
     else:
         print(f"Failed to fetch satellite tile. Status code: {response.status_code}")

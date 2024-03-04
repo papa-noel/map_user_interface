@@ -132,7 +132,7 @@ function createModelExecution(map) {
   controlButton.type = "button";
   // Setup the click event listeners
   controlButton.addEventListener("click", () => {
-
+    
     let center = map.getCenter();
     let zoom = map.getZoom();
 
@@ -147,8 +147,12 @@ function createModelExecution(map) {
         zoom: zoom, 
       }),
     })
-    .then(response => response.json())
+    .then(response => {
+      console.log("test")
+      console.log(response)
+    })
     .then(data => {
+      console.log("Reached")
       console.log(data);
       // Process your data here
     })
@@ -164,6 +168,7 @@ function createModelExecution(map) {
 // Initializes google map
 async function initMap() {
   // The location of San Diego
+  console.log("initializing map")
   const position = { lat: 32.7157, lng: -117.1611 };
   // Request needed libraries.
   //@ts-ignore

@@ -4,8 +4,8 @@
  */
  #map {
     height: 100%;
-    /*width: 640px;
-    height: 640px;*/
+    width: 640px;
+    height: 640px;
   }
   
   /* 
@@ -18,4 +18,8 @@
     padding: 0;
   }
 
+.float-left-child {
+  display: inline-block;
+  margin-left: 20px;
+}
   
