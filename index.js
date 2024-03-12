@@ -140,6 +140,7 @@ function createModelExecution(map) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Expose-Headers': "imgBytes",
       },
       body: JSON.stringify({ 
         latitude: center.lat(), 
@@ -147,13 +148,10 @@ function createModelExecution(map) {
         zoom: zoom, 
       }),
     })
-    .then(response => {
-      console.log("test")
-      console.log(response)
-    })
+    .then(response => response.json())
     .then(data => {
-      console.log("Reached")
-      console.log(data);
+      let json = JSON.parse(data);
+      document.getElementById("modelOutput").src = "data:image/jpg;base64," + json.data;
       // Process your data here
     })
     .catch(error => {

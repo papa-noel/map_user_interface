@@ -72,23 +72,7 @@ def filter_bboxes_from_outputs(outputs,img,
     return probas_to_keep, bboxes_scaled
 
 # %%
-def fig2img(fig):
-    """Convert a Matplotlib figure to a PIL Image and return it"""
-    import io
-    buf = io.BytesIO()
-    fig.savefig(buf)
-    buf.seek(0)
-    img = Image.open(buf)
-    return img
 
-def image_to_byte_array(image: Image) -> bytes:
-  # BytesIO is a file-like buffer stored in memory
-  imgByteArr = io.BytesIO()
-  # image.save expects a file-like as a argument
-  image.save(imgByteArr, format=image.format)
-  # Turn the BytesIO object back into a bytes object
-  imgByteArr = imgByteArr.getvalue()
-  return imgByteArr
 
 def plot_finetuned_results(pil_img, prob=None, boxes=None):
     plt.figure(figsize=(16,10))
@@ -104,10 +88,19 @@ def plot_finetuned_results(pil_img, prob=None, boxes=None):
             ax.text(xmin, ymin, text, fontsize=15,
                   bbox=dict(facecolor='yellow', alpha=0.5))
     plt.axis('off')
-    img = fig2img(plt.gcf())
-    #out = image_to_byte_array(img)
-    #return out
-    plt.savefig("output.jpg", bbox_inches="tight", pad_inches=0)
+    
+    buf = io.BytesIO()
+    plt.savefig(buf, format='jpg', bbox_inches="tight", pad_inches=0)
+    buf.seek(0)
+    im = Image.open(buf)
+    
+
+    imgByteArr = io.BytesIO()
+    im.save(imgByteArr, format=im.format)
+    imgByteArr = imgByteArr.getvalue()
+    buf.close()
+    return imgByteArr
+    #plt.savefig("output.jpg", bbox_inches="tight", pad_inches=0)
     #plt.show()
     
 
@@ -143,9 +136,7 @@ model.eval();
 # %%
 def get_labeled(path="input.png"):
     #img = Image.open(path).convert('RGB')
-    print(type(path))
     img = Image.open(io.BytesIO(path)).convert("RGB")
-    print(type(img))
     return run_worflow(img, model)
 
 # %%
