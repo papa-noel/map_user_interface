@@ -1,7 +1,9 @@
 **HOW TO USE**
 
 First: pip install flask. Flask will allow the bridge between the interactive map (user interface) and the python script.
+
 **REPOSITORY MUST BE USING "Alex" BRANCH FOR MODEL INTEGRATION**
+
 After cloning the repo, in the command prompt run `flask run`. This will start the development server. Right click on the index.html file and in the pop-up window, click on 'Open with Live Server'. This will open a google chrome tab (if you are using google chrome) with the interactive google map.
 
 In order for the model to be integrated into the UI, the model has to be downloaded and added to the repository locally. The following outputs folder has to be located in the top level directory of the repository. (https://drive.google.com/drive/folders/1suRIGF18j-WZ5ozDmskDm7XOqLPAScIp?usp=sharing)
