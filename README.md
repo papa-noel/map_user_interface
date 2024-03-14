@@ -12,7 +12,7 @@ After cloning the repo, in the command prompt run `flask run`. This will start t
 ### Model
 In order for the model to be integrated into the UI, the model has to be downloaded and added to the repository locally. The following outputs folder has to be located in the top level directory of the repository. The pre-trained and downloaded model can found [here](https://drive.google.com/drive/folders/1suRIGF18j-WZ5ozDmskDm7XOqLPAScIp?usp=sharing). You can also train the model yourself [here](https://github.com/jcchuang2/GRID-Object-Detection-Model).
 
-Additionally, at the top level directory you need to add a (.env) file containing your Google API key in the form API_KEY = {Your API Key}
+Additionally, at the top level directory you need to add a (.env) file containing your Google API key in the form `API_KEY = {Your API Key}`.
 
 ## Map Interface
 At the top of the map is a *Zoom Level* indicator which lets you know what level of zoom you are currently observing. This is necessary because we trained our model at Zoom Level: 19. To the right of the zoom level indicator is the *Center Coordinates* indicator. This will display the Latitude and Longitude of the center of your current map view. At the bottom of the map is the *Boundary Coordinates* indicator. Similar to the Center Coordinates indicator, this will display the Latitude Longitude of the North East corner and South West corner of your current map view.
