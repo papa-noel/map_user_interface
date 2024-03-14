@@ -1,8 +1,12 @@
 **HOW TO USE**
 
 First: pip install flask. Flask will allow the bridge between the interactive map (user interface) and the python script.
+**REPOSITORY MUST BE USING "Alex" BRANCH FOR MODEL INTEGRATION**
+After cloning the repo, in the command prompt run `flask run`. This will start the development server. Right click on the index.html file and in the pop-up window, click on 'Open with Live Server'. This will open a google chrome tab (if you are using google chrome) with the interactive google map.
 
-After cloning the repo, in the command prompt run `flask run`. This will start the development server. Right click on the index.html file and in the pop-up window, click on 'Open with Live Server'. This will open a google chrome tab (if you are using google chrome) with the interactive google map. 
+In order for the model to be integrated into the UI, the model has to be downloaded and added to the repository locally. The following outputs folder has to be located in the top level directory of the repository. (https://drive.google.com/drive/folders/1suRIGF18j-WZ5ozDmskDm7XOqLPAScIp?usp=sharing)
+
+Additionally, at the top level directory you need to add a (.env) file containing your Google API key in the form API_KEY = {Your API Key}
 
 At the top of the map is a *Zoom Level* indicator which lets you know what level ofzoom you are currently observing. This is necessary because we trained our model at Zoom Level: 19. To the right of the zoom level indicator is the *Center Coordinates* indicator. This will display the Latitude and Longitude of the center of your current map view. At the bottom of the map is the *Boundary Coordinates* indicator. Similar to the Center Coordinates indicator, this will display the Latitude Longitude of the North East corner and South West corner of your current map view.
 
