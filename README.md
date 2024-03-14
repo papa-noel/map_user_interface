@@ -5,7 +5,7 @@
 ### Flask
 First: pip install flask. Flask will allow the bridge between the interactive map (user interface) and the python script.
 
-> [!]
+> [!IMPORTANT]
 > USE "Alex" BRANCH FOR MODEL INTEGRATION
 
 After cloning the repo, in the command prompt run `flask run`. This will start the development server. Right click on the index.html file and in the pop-up window, click on 'Open with Live Server'. This will open a google chrome tab (if you are using google chrome) with the interactive google map.
