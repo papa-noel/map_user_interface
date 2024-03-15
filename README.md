@@ -2,23 +2,20 @@
 
 ## Setup
 
-### Flask
-First: pip install flask. Flask will allow the bridge between the interactive map (user interface) and the python script.
-
-> [!IMPORTANT]
-> USE "Alex" BRANCH FOR MODEL INTEGRATION
-
-After cloning the repo, in the command prompt run `flask run`. This will start the development server. Right click on the index.html file and in the pop-up window, click on 'Open with Live Server'. This will open a google chrome tab (if you are using google chrome) with the interactive google map.
-
 ### Model
-In order for the model to be integrated into the UI, the model has to be downloaded and added to the repository locally. The following outputs folder has to be located in the top level directory of the repository. The pre-trained and downloaded model can found [here](https://drive.google.com/drive/folders/1suRIGF18j-WZ5ozDmskDm7XOqLPAScIp?usp=sharing). You can also train the model by following this Github [repo](https://github.com/jcchuang2/GRID-Object-Detection-Model).
+In order for the model to be integrated into the UI, the model has to be downloaded and added to the repository locally. The following outputs folder has to be located in the top level directory of the repository. The pre-trained and downloaded model can found [here](https://drive.google.com/drive/folders/1suRIGF18j-WZ5ozDmskDm7XOqLPAScIp?usp=sharing). 
 
-Additionally, at the top level directory you need to add a (.env) file containing your Google API key in the form `API_KEY = {Your API Key}`.
+You can also train the model by following this Github [repo](https://github.com/jcchuang2/GRID-Object-Detection-Model).
 
-## Map Interface
-At the top of the map is a *Zoom Level* indicator which lets you know what level of zoom you are currently observing. This is necessary because we trained our model at Zoom Level: 19. To the right of the zoom level indicator is the *Center Coordinates* indicator. This will display the Latitude and Longitude of the center of your current map view. At the bottom of the map is the *Boundary Coordinates* indicator. Similar to the Center Coordinates indicator, this will display the Latitude Longitude of the North East corner and South West corner of your current map view.
+### Applying the model
+After making sure you have the proper outputs/checkpoint.pth file from downloading the file above, open Google Maps in satellite view either in an app or through a webpage. Click on "Layers" in the bottom left corner to view the satellite images. 
 
-To the left, there are 3 buttons (excluding the map/satellite buttons which switch the map layout). The *Center Map* button will center the map automatically on San Diego. The *Training Areas* button will toggle on and off the highlighting of the locations of our training areas. The *Identify Poles* button saves an image of your current map view.  
+The model captures the left half of the screen, and has a pop-up window on the right half. It may be needed to split screen accordingly.
+
+Afterwards, zoom in on any area where the user may want to detect poles and begin running 'mssCapture_DETR.py'
+
+Press "q" in the application pop-up window to exit. 
+
 
 ## More Information
 More information about this project can be found at our [website](https://jcchuang2.github.io/DSC180B_GRID/).
