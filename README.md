@@ -11,7 +11,7 @@ First: pip install flask. Flask will allow the bridge between the interactive ma
 After cloning the repo, in the command prompt run `flask run`. This will start the development server. Right click on the index.html file and in the pop-up window, click on 'Open with Live Server'. This will open a google chrome tab (if you are using google chrome) with the interactive google map.
 
 ### Model
-In order for the model to be integrated into the UI, the model has to be downloaded and added to the repository locally. We trained the model in this Github repository: [GRID-Object-Detection-Model](https://github.com/jcchuang2/GRID-Object-Detection-Model)The following outputs folder has to be located in the top level directory of the repository. The pre-trained and downloaded model can found [here](https://drive.google.com/drive/folders/1suRIGF18j-WZ5ozDmskDm7XOqLPAScIp?usp=sharing).
+In order for the model to be integrated into the UI, the model has to be downloaded and added to the repository locally. We trained the model in this Github repository: [GRID-Object-Detection-Model](https://github.com/jcchuang2/GRID-Object-Detection-Model). The following outputs folder has to be located in the top level directory of the repository. The pre-trained and downloaded model can found [here](https://drive.google.com/drive/folders/1suRIGF18j-WZ5ozDmskDm7XOqLPAScIp?usp=sharing).
 
 Additionally, at the top level directory you need to add a (.env) file containing your Google API key in the form `API_KEY = {Your API Key}`.
 
